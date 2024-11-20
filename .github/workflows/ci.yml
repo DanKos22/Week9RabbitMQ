@@ -24,6 +24,7 @@ jobs:
       - name: Package with Maven
         run: mvn clean package
 
+      #Build a Docker Image
       - name: Build Docker Image
         run: docker build -t product_pipe_image .
 
