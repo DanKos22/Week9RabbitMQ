@@ -1,0 +1,32 @@
+name: Java first workflow
+
+on:
+  push:
+    branches:
+      master
+
+  pull_request:
+    branches:
+      master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code from repo
+        uses: actions/checkout@v4
+
+      - name: Get Jdk
+        uses: actions/setup-java@4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Package with Maven
+        run: mvn clean package
+
+      - name: Build Docker image
+        run: docker build -t product-pipe-image .
+
+
+    
